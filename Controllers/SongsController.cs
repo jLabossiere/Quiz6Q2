@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,6 +11,16 @@ using Quiz6Q2;
 
 namespace Quiz6Q2.Controllers
 {
+    public class GetUserSongs
+    {
+        public string Name { get; set; }
+        public string Title { get; set; }
+    }
+    public class SongDownloads
+    {
+        public string Title { get; set; }
+        public int Downloads { get; set; }
+    }
     public class SongsController : Controller
     {
         private ItunesCopyEntities db = new ItunesCopyEntities();
@@ -30,6 +41,20 @@ namespace Quiz6Q2.Controllers
             }
             var mostPop = SongPop.OrderByDescending(x => x.Value).First();
             return View(db.Songs.FirstOrDefault(x=>x.Id == mostPop.Key));
+        }
+
+        public ActionResult UserSongs(int id)
+        {
+            var songs = db.Database.SqlQuery<GetUserSongs>("EXEC GetUserSongs @UserId", new SqlParameter("UserId", id)).ToList();
+            return View(songs);
+
+        }
+
+        public ActionResult SongDownloads(int id)
+        {
+            var song = db.Database.SqlQuery<SongDownloads>("EXEC GetSongDownloads @SongId", new SqlParameter("SongId", id)).ToList().First();
+            return View(song);
+
         }
 
         // GET: Songs/Details/5

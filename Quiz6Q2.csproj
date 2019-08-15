@@ -240,6 +240,8 @@
     <Content Include="Views\UserSongs\Index.cshtml" />
     <Content Include="Views\Songs\MostPopularSong.cshtml" />
     <Content Include="Views\Artists\MostPopularArtist.cshtml" />
+    <Content Include="Views\Songs\UserSongs.cshtml" />
+    <Content Include="Views\Songs\SongDownloads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

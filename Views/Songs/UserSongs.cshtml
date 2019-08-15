@@ -1,0 +1,12 @@
+﻿@model System.Collections.Generic.ICollection<Quiz6Q2.Controllers.GetUserSongs>
+@{
+    ViewBag.Title = "UserSongs";
+}
+
+<h2>UserSongs</h2>
+
+@foreach (var song in Model)
+{
+    <p>@song.Title</p>
+}
+
